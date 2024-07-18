@@ -50,4 +50,11 @@ class User extends Authenticatable implements FilamentUser
             'password' => 'hashed',
         ];
     }
+
+    public function books()
+    {
+        return $this->belongsToMany(Book::class, 'loans')
+            ->withPivot('id', 'loaned_at', 'returned_at')
+            ->withTimestamps();
+    }
 }

@@ -4,6 +4,7 @@ use App\Models\Book;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -22,6 +23,19 @@ return new class extends Migration
             $table->enum('status', ['borrowed', 'returned'])->default('borrowed');
             $table->timestamps();
         });
+
+        DB::unprepared('
+            CREATE TRIGGER update_loan_status AFTER INSERT ON loans
+            FOR EACH ROW
+            BEGIN
+                UPDATE loans SET status =
+                    CASE
+                        WHEN NEW.returned_at = DATE("now") THEN "returned"
+                        ELSE "borrowed"
+                    END
+                WHERE id = NEW.id;
+            END;
+        ');
     }
 
     /**

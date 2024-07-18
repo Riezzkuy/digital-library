@@ -26,4 +26,9 @@ class Book extends Model
 
        return ($isUrl) ? $this->cover : Storage::disk('public')->url($this->cover);
     }
+
+    public function scopeSearch($query, $search = '')
+    {
+        $query->where('title', 'like', "%{$search}%");
+    }
 }
