@@ -17,13 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug')->unique();
-            $table->string('isbn')->unique();
             $table->string('publication_year');
             $table->foreignIdFor(Author::class);
             $table->string('cover');
             $table->string('description');
-            $table->string('file');
-            $table->enum('status', ['available', 'borrowed'])->default('available');
             $table->timestamps();
         });
     }

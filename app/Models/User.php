@@ -57,4 +57,9 @@ class User extends Authenticatable implements FilamentUser
             ->withPivot('id', 'loaned_at', 'returned_at')
             ->withTimestamps();
     }
+
+    public function loans()
+    {
+        return $this->hasMany(Loan::class);
+    }
 }

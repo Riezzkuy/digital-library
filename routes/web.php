@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CopyController;
 use App\Http\Controllers\HomeController;
 use App\Livewire\BookLoaned;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +16,9 @@ Route::get('books/{book:slug}', [BookController::class, 'show'])
 
 Route::get('books/{book:slug}/read', [BookController::class, 'read'])
     ->name('books.read');
+
+Route::get('copys/{copy:isbn}/read', [CopyController::class, 'read'])
+    ->name('copys.read');
 
 Route::get('loaned', BookLoaned::class)
     ->middleware(['auth'])

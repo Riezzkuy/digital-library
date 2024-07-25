@@ -1,10 +1,8 @@
 <?php
 
-use App\Models\Copy;
-use App\Models\User;
+use App\Models\Book;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -14,12 +12,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('loans', function (Blueprint $table) {
+        Schema::create('copies', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Copy::class);
-            $table->foreignIdFor(User::class);
-            $table->date('loaned_at')->nullable();
-            $table->date('returned_at')->nullable();
+            $table->foreignIdFor(Book::class);
+            $table->string('isbn')->unique();
+            $table->string('file');
+            $table->boolean('is_borrowed')->default(false);
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('loans');
+        Schema::dropIfExists('copies');
     }
 };

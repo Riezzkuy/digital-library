@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Loan;
 use App\View\Components\AppLayout;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
@@ -9,9 +10,11 @@ use Livewire\Component;
 class BookLoaned extends Component
 {
     #[Computed()]
-    public function books()
+    public function loans()
     {
-        return auth()->user()->books()->paginate(4);
+        return Loan::where('user_id', auth()->id())
+            ->with('copy.book')
+            ->paginate(4);
     }
 
     public function render()

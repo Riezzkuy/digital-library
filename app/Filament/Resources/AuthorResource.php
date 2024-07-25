@@ -10,6 +10,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -26,7 +27,7 @@ class AuthorResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
-                    ->live(debounce: 1500)
+                    ->lazy()
                     ->label('Name')
                     ->required()
                     ->afterStateUpdated(function (string $operation, $state, Forms\Set $set) {
@@ -47,7 +48,14 @@ class AuthorResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('name')
+                    ->label('Name')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('slug')
+                    ->label('Slug')
+                    ->searchable()
+                    ->sortable(),
             ])
             ->filters([
                 //

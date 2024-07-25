@@ -1,5 +1,4 @@
 <x-app-layout>
-    @dd($book)
     <div class="container mx-auto py-8">
         <div id="pdf-viewer" class="border rounded-lg overflow-hidden shadow-lg" style="width: 100%; height: 100%;"></div>
         <div class="flex items-center justify-between my-4">
@@ -13,7 +12,7 @@
     <script>
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.worker.min.js';
 
-        var url = "{{ asset('storage/' . $book->file) }}";
+        var url = "{{ asset('storage/' . $copy->file) }}";
         var pdfDoc = null,
             pageNum = 1,
             pageRendering = false,

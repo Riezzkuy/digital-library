@@ -20,6 +20,11 @@ class Book extends Model
         return $this->belongsToMany(Category::class);
     }
 
+    public function copies()
+    {
+        return $this->hasMany(Copy::class);
+    }
+
     public function getCoverUrl()
     {
        $isUrl = str_contains($this->cover, 'http');
