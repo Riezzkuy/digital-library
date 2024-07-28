@@ -24,4 +24,9 @@ class Copy extends Model
     {
         return $query->where('is_borrowed', false);
     }
+
+    public function scopeQueue($query)
+    {
+        $query->with('loans')->whereNull('loaned_at')->count();
+    }
 }

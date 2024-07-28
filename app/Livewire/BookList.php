@@ -37,6 +37,27 @@ class BookList extends Component
             ->paginate(4);
     }
 
+    public function getQueuedCountForBook($bookId)
+    {
+        return Loan::whereHas('copy', function ($query) use ($bookId) {
+            $query->where('book_id', $bookId);
+        })->whereNull('loaned_at')->count();
+    }
+
+    public function getStockCountForBook($bookId)
+    {
+        return Copy::where('book_id', $bookId)
+            ->where('is_borrowed', false)
+            ->count();
+    }
+
+    public function getViewerCountForBook($bookId)
+    {
+        return Copy::where('book_id', $bookId)
+            ->where('is_borrowed', true)
+            ->count();
+    }
+
     public function borrow($bookId)
     {
         if (!auth()->check()) {
