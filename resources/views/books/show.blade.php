@@ -42,7 +42,7 @@
                   Add to favorites
                 </a>
 
-                <livewire:book-loan :book="$book" />
+                <livewire:book-loan :bookId="$book->id" />
               </div>
 
               <hr class="my-6 md:my-8 border-gray-200 dark:border-gray-800" />

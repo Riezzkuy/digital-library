@@ -7,20 +7,20 @@ use App\View\Components\AppLayout;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
-class BookLoaned extends Component
+class BookQueued extends Component
 {
+
     #[Computed()]
-    public function loans()
+    public function queues()
     {
         return Loan::where('user_id', auth()->id())
             ->with('copy.book')
-            ->whereNotNull('loaned_at')
             ->paginate(4);
     }
 
     public function render()
     {
-        return view('livewire.book-loaned')
-            ->layout(AppLayout::class, ['title' => 'Books Loaned']);
+        return view('livewire.book-queued')
+            ->layout(AppLayout::class, ['title' => 'Queued']);
     }
 }
