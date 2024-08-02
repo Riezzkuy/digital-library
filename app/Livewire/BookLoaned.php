@@ -15,6 +15,7 @@ class BookLoaned extends Component
         return Loan::where('user_id', auth()->id())
             ->with('copy.book')
             ->whereNotNull('loaned_at')
+            ->whereNull('returned_at')
             ->paginate(4);
     }
 
