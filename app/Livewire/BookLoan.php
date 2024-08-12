@@ -46,7 +46,7 @@ class BookLoan extends Component
 
         $this->copy->update(['is_borrowed' => true]);
 
-        ReturnBookJob::dispatch($loan)->delay(now()->addDays(7));
+        ReturnBookJob::dispatch($loan)->delay(now()->addMinutes(1));
 
         $this->dispatch('close');
     }
