@@ -1,9 +1,9 @@
 <section class="spaec-y-6">
-    @if ($this->stock)
+    @if (!$this->stock)
         <button
             x-data= ""
             x-on:click.prevent="$dispatch('open-modal', 'confirm-loan-book')"
-            class="text-white mt-4 sm:mt-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 flex items-center justify-center"
+            class="flex justify-center items-center px-5 py-2.5 mt-4 text-sm font-medium text-white rounded-lg sm:mt-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
             role="button">
             <svg class="w-5 h-5 -ms-2 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                 fill="none" viewBox="0 0 24 24">
@@ -26,12 +26,12 @@
                     {{ __('Once you loaned it will be returned automaticaly on 7 days.') }}
                 </p>
 
-                <div class="mt-6 flex justify-end">
+                <div class="flex justify-end mt-6">
                     <x-secondary-button x-on:click="$dispatch('close')">
                         {{ __('Cancel') }}
                     </x-secondary-button>
 
-                    <button type="submit" class="ms-3 inline-flex items-center px-4 py-2 bg-primary-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-primary-500 active:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
+                    <button type="submit" class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase rounded-md border border-transparent transition duration-150 ease-in-out ms-3 bg-primary-600 hover:bg-primary-500 active:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800">
                         {{ __('Loan Book') }}
                     </button>
                 </div>
@@ -41,7 +41,7 @@
         <button
             x-data= ""
             x-on:click.prevent="$dispatch('open-modal', 'confirm-queue-book')"
-            class="text-white mt-4 sm:mt-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 flex items-center justify-center"
+            class="flex justify-center items-center px-5 py-2.5 mt-4 text-sm font-medium text-white rounded-lg sm:mt-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
             role="button">
             <svg class="w-5 h-5 -ms-2 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                 fill="none" viewBox="0 0 24 24">
@@ -63,12 +63,12 @@
                     {{ __('Once you on queue, you will be on the waiting list for loan this book automaticaly when the books already available.') }}
                 </p>
 
-                <div class="mt-6 flex justify-end">
+                <div class="flex justify-end mt-6">
                     <x-secondary-button x-on:click="$dispatch('close')">
                         {{ __('Cancel') }}
                     </x-secondary-button>
 
-                    <button type="submit" class="ms-3 inline-flex items-center px-4 py-2 bg-primary-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-primary-500 active:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
+                    <button type="submit" class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase rounded-md border border-transparent transition duration-150 ease-in-out ms-3 bg-primary-600 hover:bg-primary-500 active:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800">
                         {{ __('Queue Book') }}
                     </button>
                 </div>
