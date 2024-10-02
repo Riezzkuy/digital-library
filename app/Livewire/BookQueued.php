@@ -15,6 +15,7 @@ class BookQueued extends Component
     {
         return Loan::where('user_id', auth()->id())
             ->with('copy.book')
+            ->whereNull('loaned_at')
             ->paginate(4);
     }
 
