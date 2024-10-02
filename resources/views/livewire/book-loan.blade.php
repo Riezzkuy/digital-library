@@ -1,5 +1,5 @@
 <section class="spaec-y-6">
-    @if ($this->stock)
+    @if ($stock)
         <button
             x-data= ""
             x-on:click.prevent="$dispatch('open-modal', 'confirm-loan-book')"

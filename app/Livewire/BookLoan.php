@@ -20,11 +20,7 @@ class BookLoan extends Component
     public function mount($bookId)
     {
         $this->bookId = $bookId;
-    }
-
-    public function stock($bookId)
-    {
-        Copy::where('book_id', $bookId)
+        $this->stock = Copy::where('book_id', $bookId)
             ->where('is_borrowed', false)
             ->exists();
     }
@@ -47,6 +43,8 @@ class BookLoan extends Component
         $this->copy->update(['is_borrowed' => true]);
 
         ReturnBookJob::dispatch($loan)->delay(now()->addMinutes(1));
+
+        $this->stock = false;
 
         $this->dispatch('close');
     }
@@ -71,6 +69,8 @@ class BookLoan extends Component
 
     public function render()
     {
-        return view('livewire.book-loan');
+        return view('livewire.book-loan', [
+            'stock' => $this->stock,
+        ]);
     }
 }
