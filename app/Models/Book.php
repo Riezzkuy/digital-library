@@ -10,9 +10,14 @@ class Book extends Model
 {
     use HasFactory;
 
-    public function author()
+    public function authors()
     {
-        return $this->belongsTo(Author::class);
+        return $this->belongsToMany(Author::class);
+    }
+
+    public function publisher()
+    {
+        return $this->belongsTo(Publisher::class);
     }
 
     public function categories()
@@ -22,14 +27,14 @@ class Book extends Model
 
     public function copies()
     {
-        return $this->hasMany(Copy::class);
+        return $this->hasMany(Copy::class, 'book_id', 'id');
     }
 
     public function getCoverUrl()
     {
-       $isUrl = str_contains($this->cover, 'http');
+        $isUrl = str_contains($this->cover, 'http');
 
-       return ($isUrl) ? $this->cover : Storage::disk('public')->url($this->cover);
+        return ($isUrl) ? $this->cover : Storage::disk('public')->url($this->cover);
     }
 
     public function scopeSearch($query, $search = '')

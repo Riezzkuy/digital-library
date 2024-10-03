@@ -7,6 +7,7 @@ use App\Filament\Resources\BookResource\RelationManagers;
 use App\Filament\Resources\BookResource\RelationManagers\CopiesRelationManager;
 use App\Models\Book;
 use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -25,7 +26,7 @@ class BookResource extends Resource
 {
     protected static ?string $model = Book::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-book-open';
 
     public static function form(Form $form): Form
     {
@@ -38,24 +39,32 @@ class BookResource extends Resource
                             ->label('Title')
                             ->required()
                             ->afterStateUpdated(function (string $operation, $state, Forms\Set $set) {
-                                if($operation === 'edit') {
+                                if ($operation === 'edit') {
                                     return;
                                 }
 
-                                $set('slug',  Str::slug($state));
+                                $set('slug', Str::slug($state));
                             }),
                         TextInput::make('slug')
                             ->required()
-                            ->unique(ignoreRecord:true)
-                            ->readOnly()
-                            ->maxLength(150),
-                        TextInput::make('publication_year')
-                            ->label('Publication Year')
+                            ->unique(ignoreRecord: true)
+                            ->readOnly(),
+                        TextInput::make('isbn')
                             ->required()
-                            ->maxLength(4),
-                        Select::make('author_id')
+                            ->unique(ignoreRecord: true),
+                        DatePicker::make('published_at')
+                            ->native(false)
+                            ->displayFormat('d/m/Y')
+                            ->required(),
+                        Select::make('publisher_id')
+                            ->label('Publisher')
+                            ->relationship('publisher', 'name')
+                            ->searchable()
+                            ->required(),
+                        Select::make('authors')
                             ->label('Author')
-                            ->relationship('author', 'name')
+                            ->multiple()
+                            ->relationship('authors', 'name')
                             ->searchable()
                             ->required(),
                         Select::make('categories')
@@ -70,11 +79,11 @@ class BookResource extends Resource
                 Section::make('Meta')
                     ->schema([
                         FileUpload::make('cover')
-                        ->image()
-                        ->directory('books/covers')
-                        ->required(),
+                            ->image()
+                            ->directory('books/covers')
+                            ->required(),
                     ])
-                ]);
+            ]);
     }
 
     public static function table(Table $table): Table

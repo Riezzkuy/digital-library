@@ -18,7 +18,7 @@ Route::get('books/{book:slug}', [BookController::class, 'show'])
 Route::get('books/{book:slug}/read', [BookController::class, 'read'])
     ->name('books.read');
 
-Route::get('copys/{copy:isbn}/read', [CopyController::class, 'read'])
+Route::get('copys/{copy:id}/read', [CopyController::class, 'read'])
     ->name('copys.read');
 
 Route::get('loaned', BookLoaned::class)
@@ -37,4 +37,4 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

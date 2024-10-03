@@ -26,7 +26,7 @@ class CopiesRelationManager extends RelationManager
             ->schema([
                 Grid::make(1)
                     ->schema([
-                        TextInput::make('isbn')
+                        TextInput::make('call_number')
                             ->required()
                             ->maxLength(255),
                         FileUpload::make('file')
@@ -38,9 +38,8 @@ class CopiesRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('isbn')
             ->columns([
-                TextColumn::make('isbn'),
+                TextColumn::make('call_number'),
                 IconColumn::make('is_borrowed')
                     ->boolean()
                     ->trueIcon('heroicon-o-check-circle')

@@ -20,7 +20,7 @@ class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-tag';
 
     public static function form(Form $form): Form
     {
@@ -31,15 +31,15 @@ class CategoryResource extends Resource
                     ->label('Name')
                     ->required()
                     ->afterStateUpdated(function (string $operation, $state, Forms\Set $set) {
-                        if($operation === 'edit') {
+                        if ($operation === 'edit') {
                             return;
                         }
 
-                        $set('slug',  Str::slug($state));
+                        $set('slug', Str::slug($state));
                     }),
                 TextInput::make('slug')
                     ->required()
-                    ->unique(ignoreRecord:true)
+                    ->unique(ignoreRecord: true)
                     ->readOnly(),
             ]);
     }
