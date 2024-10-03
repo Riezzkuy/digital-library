@@ -19,7 +19,7 @@
 
 
                     <div class="mt-4 flex items-center justify-between gap-4 text-center">
-                        <a wire:navigate href="{{ route('copys.read', $loan->copy->isbn) }}" class="w-full rounded-lg bg-primary-700 px-5 py-2.5 text-sm text-center font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                        <a wire:navigate href="{{ route('copys.read', $loan->copy->id) }}" class="w-full rounded-lg bg-primary-700 px-5 py-2.5 text-sm text-center font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                             {{__('Read')}}
                         </a>
                     </div>

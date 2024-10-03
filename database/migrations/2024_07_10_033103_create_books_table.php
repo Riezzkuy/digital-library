@@ -2,12 +2,12 @@
 
 use App\Models\Author;
 use App\Models\Category;
+use App\Models\Publisher;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(Publisher::class);
             $table->string('title');
             $table->string('slug')->unique();
-            $table->string('publication_year');
-            $table->foreignIdFor(Author::class);
+            $table->string('isbn')->unique();
+            $table->date('published_at');
             $table->string('cover');
             $table->string('description');
             $table->timestamps();

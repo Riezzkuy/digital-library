@@ -32,8 +32,8 @@ class BookLoan extends Component
         }
 
         $this->copy = Copy::where('book_id', $bookId)
-        ->where('is_borrowed', false)
-        ->firstOrFail();
+            ->where('is_borrowed', false)
+            ->firstOrFail();
 
         $loan = $this->copy->loans()->create([
             'user_id' => auth()->id(),
@@ -46,7 +46,7 @@ class BookLoan extends Component
 
         $this->stock = false;
 
-        $this->dispatch('close');
+        $this->redirect('/loaned', navigate: true);
     }
 
     public function queueBook($bookId): void
@@ -56,15 +56,15 @@ class BookLoan extends Component
         }
 
         $this->copy = Copy::where('book_id', $bookId)
-        ->where('is_borrowed', true)
-        ->orderBy('loaned_at', 'asc')
-        ->firstOrFail();
+            ->where('is_borrowed', true)
+            ->orderBy('loaned_at', 'asc')
+            ->firstOrFail();
 
         $loan = $this->copy->loans()->create([
             'user_id' => auth()->id()
         ]);
 
-        $this->dispatch('close');
+        $this->redirect('/queued', navigate: true);
     }
 
     public function render()

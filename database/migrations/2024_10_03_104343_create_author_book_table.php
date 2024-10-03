@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Author;
 use App\Models\Book;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -11,12 +12,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('copies', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+        Schema::create('author_book', function (Blueprint $table) {
+            $table->id();
+            $table->foreignIdFor(Author::class);
             $table->foreignIdFor(Book::class);
-            $table->string('call_number')->unique();
-            $table->string('file');
-            $table->boolean('is_borrowed')->default(false);
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('copies');
+        Schema::dropIfExists('author_book');
     }
 };
