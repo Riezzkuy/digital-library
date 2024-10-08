@@ -75,6 +75,9 @@ class BookResource extends Resource
                             ->required(),
                         TextInput::make('description')
                             ->required(),
+                        TextInput::make('pages')
+                            ->type('number')
+                            ->required(),
                     ]),
                 Section::make('Meta')
                     ->schema([
@@ -94,11 +97,11 @@ class BookResource extends Resource
                     ->label('Title')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('publication_year')
-                    ->label('Publication Year')
+                TextColumn::make('published_at')
+                    ->label('Published At')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('author.name')
+                TextColumn::make('authors.name')
                     ->label('Author')
                     ->searchable()
                     ->sortable(),
@@ -108,6 +111,9 @@ class BookResource extends Resource
                 TextColumn::make('description')
                     ->label('Description')
                     ->searchable()
+                    ->sortable(),
+                TextColumn::make('pages')
+                    ->label('Pages')
                     ->sortable(),
                 ImageColumn::make('cover')
                     ->label('Cover'),

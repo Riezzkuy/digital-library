@@ -22,6 +22,7 @@ return new class extends Migration {
             $table->date('published_at');
             $table->string('cover');
             $table->string('description');
+            $table->integer('pages');
             $table->timestamps();
         });
     }

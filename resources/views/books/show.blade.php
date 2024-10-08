@@ -14,42 +14,72 @@
                 {{ $book->title }}
               </h1>
 
-              {{-- button --}}
-              <div class="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
-                <a
-                  href="#"
-                  title=""
-                  class="flex items-center justify-center py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-                  role="button"
-                >
-                  <svg
-                    class="w-5 h-5 -ms-2 me-2"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"
-                    />
-                  </svg>
-                  Add to favorites
-                </a>
-
-                <livewire:book-loan :bookId="$book->id" />
-              </div>
-
               <hr class="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
 
               <p class="mb-6 text-gray-500 dark:text-gray-400">
                 {{ $book->description }}
               </p>
+
+
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 text-xl font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Book Details
+                        </th>
+                    </tr>
+                    <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Authors
+                        </th>
+                        <td class="px-6 py-4">
+                            @foreach ($book->authors as $author)
+                                <li>{{ $author->name }}</li>
+                            @endforeach
+                        </td>
+                    </tr>
+                    <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Categories
+                        </th>
+                        <td class="px-6 py-4">
+                            @foreach ($book->categories as $category)
+                                <li>{{ $category->name }}</li>
+                            @endforeach
+                        </td>
+                    </tr>
+                    <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Publisher
+                        </th>
+                        <td class="px-6 py-4">
+                            {{ $book->publisher->name }}
+                        </td>
+                    </tr>
+                    <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Published At
+                        </th>
+                        <td class="px-6 py-4">
+                            {{ $book->published_at }}
+                        </td>
+                    </tr>
+                    <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Pages
+                        </th>
+                        <td class="px-6 py-4">
+                            {{ $book->pages }}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            {{-- button --}}
+            <div class="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
+                <livewire:book-loan :bookId="$book->id" />
+            </div>
+
             </div>
           </div>
         </div>

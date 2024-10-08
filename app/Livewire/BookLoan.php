@@ -17,11 +17,34 @@ class BookLoan extends Component
 
     public $stock;
 
+    public $isLoaned;
+
+    public $activeLoan;
+
+    public $isQueued;
+
     public function mount($bookId)
     {
         $this->bookId = $bookId;
         $this->stock = Copy::where('book_id', $bookId)
             ->where('is_borrowed', false)
+            ->exists();
+        $this->activeLoan = Loan::whereHas('copy', function ($query) use ($bookId) {
+            $query->where('book_id', $bookId);
+        })
+            ->where('user_id', auth()->id())
+            ->whereNotNull('loaned_at')
+            ->whereNull('returned_at')
+            ->first();
+
+        $this->isLoaned = $this->activeLoan !== null;
+
+        $this->isQueued = Loan::whereHas('copy', function ($query) use ($bookId) {
+            $query->where('book_id', $bookId);
+        })
+            ->where('user_id', auth()->id())
+            ->whereNull('loaned_at')
+            ->whereNull('returned_at')
             ->exists();
     }
 
@@ -45,6 +68,8 @@ class BookLoan extends Component
         ReturnBookJob::dispatch($loan)->delay(now()->addMinutes(1));
 
         $this->stock = false;
+        $this->isLoaned = true;
+        $this->activeLoan = $loan;
 
         $this->redirect('/loaned', navigate: true);
     }
@@ -64,6 +89,29 @@ class BookLoan extends Component
             'user_id' => auth()->id()
         ]);
 
+        $this->isQueued = true;
+
+        $this->redirect('/queued', navigate: true);
+    }
+
+    public function cancelQueue($bookId): void
+    {
+        if (!auth()->check()) {
+            redirect()->route('login');
+        }
+
+        $loan = Loan::whereHas('copy', function ($query) use ($bookId) {
+            $query->where('book_id', $bookId);
+        })
+            ->where('user_id', auth()->id())
+            ->whereNull('loaned_at')
+            ->whereNull('returned_at')
+            ->firstOrFail();
+
+        $loan->delete();
+
+        $this->isQueued = false;
+
         $this->redirect('/queued', navigate: true);
     }
 
@@ -71,6 +119,9 @@ class BookLoan extends Component
     {
         return view('livewire.book-loan', [
             'stock' => $this->stock,
+            'isLoaned' => $this->isLoaned,
+            'activeLoan' => $this->activeLoan,
+            'isQueued' => $this->isQueued,
         ]);
     }
 }
