@@ -25,12 +25,12 @@
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                         <th scope="row" class="px-6 py-4 text-xl font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Book Details
+                            {{__('Book Details')}}
                         </th>
                     </tr>
                     <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Authors
+                            {{__('Authors')}}
                         </th>
                         <td class="px-6 py-4">
                             @foreach ($book->authors as $author)
@@ -40,7 +40,7 @@
                     </tr>
                     <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Categories
+                            {{__('Categories')}}
                         </th>
                         <td class="px-6 py-4">
                             @foreach ($book->categories as $category)
@@ -50,7 +50,7 @@
                     </tr>
                     <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Publisher
+                            {{__('Publisher')}}
                         </th>
                         <td class="px-6 py-4">
                             {{ $book->publisher->name }}
@@ -58,7 +58,7 @@
                     </tr>
                     <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Published At
+                            {{__('Published at')}}
                         </th>
                         <td class="px-6 py-4">
                             {{ $book->published_at }}
@@ -66,7 +66,7 @@
                     </tr>
                     <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            Pages
+                            {{__('Pages')}}
                         </th>
                         <td class="px-6 py-4">
                             {{ $book->pages }}

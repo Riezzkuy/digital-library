@@ -73,7 +73,7 @@
                             <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/>
                             <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
                         </svg>
-                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ $this->getViewerCountForBook($book->id) }} Pembaca</p>
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ $this->getViewerCountForBook($book->id) }} {{__('Readers')}}</p>
                     </li>
 
                     {{-- <li class="flex items-center gap-2">
@@ -85,63 +85,28 @@
                 </ul>
 
                 <div class="mt-4 flex items-center justify-between gap-4">
-                <p class="inline-flex items-center rounded-lg px-5 py-2.5 md:px-3 text-sm font-medium text-white bg-yellow-500 dark:bg-yellow-500">
-                    <svg class="-ms-2 me-2 h-5 w-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                    </svg>
-                    Queue: {{$this->getQueuedCountForBook($book->id)}}
-                </p>
-
-                <p class="inline-flex items-center rounded-lg  px-5 py-2.5 md:px-3 text-sm font-medium text-white bg-green-700 dark:bg-green-700">
-                    <svg class="-ms-2 me-2 h-5 w-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12.013 6.175 7.006 9.369l5.007 3.194-5.007 3.193L2 12.545l5.006-3.193L2 6.175l5.006-3.194 5.007 3.194ZM6.981 17.806l5.006-3.193 5.006 3.193L11.987 21l-5.006-3.194Z"/>
-                        <path d="m12.013 12.545 5.006-3.194-5.006-3.176 4.98-3.194L22 6.175l-5.007 3.194L22 12.562l-5.007 3.194-4.98-3.211Z"/>
-                      </svg>
-
-                    Stock : {{$this->getStockCountForBook($book->id)}}
-                </p>
-
-
-
-                {{-- @if ($this->isEmpty($book->id))
-                    <button wire:click="queue({{ $book->id }})" class="inline-flex items-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                    <p class="inline-flex items-center rounded-lg px-5 py-2.5 md:px-3 text-sm font-medium text-white bg-yellow-500 dark:bg-yellow-500">
                         <svg class="-ms-2 me-2 h-5 w-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                         </svg>
-                        Queue
-                    </button>
-                @else
-                    <button wire:click="borrow({{ $book->id }})" class="inline-flex items-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                        <svg class="-ms-2 me-2 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4h1.5L8 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm.75-3H7.5M11 7H6.312M17 4v6m-3-3h6" />
-                        </svg>
-                        Borrow
-                    </button>
-                @endif --}}
+                        {{__('Queue')}} : {{$this->getQueuedCountForBook($book->id)}}
+                    </p>
 
-                {{-- @if($this->isBorrowed($book->id))
-                    <a href="{{ route('books.read', $book->slug) }}" class="inline-flex items-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    <p class="inline-flex items-center rounded-lg  px-5 py-2.5 md:px-3 text-sm font-medium text-white bg-green-700 dark:bg-green-700">
+                        <svg class="-ms-2 me-2 h-5 w-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12.013 6.175 7.006 9.369l5.007 3.194-5.007 3.193L2 12.545l5.006-3.193L2 6.175l5.006-3.194 5.007 3.194ZM6.981 17.806l5.006-3.193 5.006 3.193L11.987 21l-5.006-3.194Z"/>
+                            <path d="m12.013 12.545 5.006-3.194-5.006-3.176 4.98-3.194L22 6.175l-5.007 3.194L22 12.562l-5.007 3.194-4.98-3.211Z"/>
                         </svg>
-                        Read
-                    </a>
-                @elseif($this->isBorrowedByAnother($book->id))
-                    <a wire:click="qu" class="inline-flex items-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                        <svg class="-ms-2 me-2 h-5 w-5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                          </svg>
-                        Queue
-                    </a>
-                @else
-                    <button wire:click="borrowBook({{ $book->id }})" class="inline-flex items-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                        <svg class="-ms-2 me-2 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4h1.5L8 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm.75-3H7.5M11 7H6.312M17 4v6m-3-3h6" />
-                        </svg>
-                        Borrow
-                    </button>
-                @endif --}}
+
+                        {{__('Stock')}} : {{$this->getStockCountForBook($book->id)}}
+                    </p>
                 </div>
             </div>
         </div>
     @endforeach
-  </div>
+    @if ($this->books->hasMorePages())
+        <div class="col-span-full text-center">
+            <button type="button" wire:click="$dispatch('showMore')" class="rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700">{{__('Show more')}}</button>
+        </div>
+    @endif
+</div>

@@ -22,7 +22,7 @@
         <x-modal name="confirm-loan-book" :show="$errors->isNotEmpty()" focusable>
             <form wire:submit.prevent="loanBook({{ $bookId }})" class="p-6">
                 <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                    {{ __('Are you sure you want to loan this book?') }}
+                    {{ __('Loan this book?') }}
                 </h2>
 
                 <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
@@ -35,7 +35,7 @@
                     </x-secondary-button>
 
                     <button type="submit" class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out border border-transparent rounded-md ms-3 bg-primary-600 hover:bg-primary-500 active:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800">
-                        {{ __('Loan Book') }}
+                        {{ __('Loan') }}
                     </button>
                 </div>
             </form>
@@ -52,7 +52,7 @@
         <x-modal name="confirm-cancel-queue" :show="$errors->isNotEmpty()" focusable>
             <form wire:submit.prevent="cancelQueue({{ $bookId }})" class="p-6">
                 <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                    {{ __('Are you sure you want to cancel the queue for this book?') }}
+                    {{ __('Remove from queue?') }}
                 </h2>
 
                 <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
@@ -65,7 +65,7 @@
                     </x-secondary-button>
 
                     <button type="submit" class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out border border-transparent rounded-md ms-3 bg-red-600 hover:bg-red-500 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800">
-                        {{ __('Yes, Cancel Queue') }}
+                        {{ __('Cancel Queue') }}
                     </button>
                 </div>
             </form>
@@ -81,13 +81,13 @@
             </button>
         @else
             <a href="{{ route('login') }}" class="flex justify-center items-center px-5 py-2.5 mt-4 text-sm font-medium text-white rounded-lg sm:mt-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
-                {{__('Login to Queue')}}
+                {{__('Login')}}
             </a>
         @endauth
         <x-modal name="confirm-queue-book" :show="$errors->isNotEmpty()" focusable>
             <form wire:submit.prevent="queueBook({{ $bookId }})" class="p-6">
                 <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                    {{ __('Are you sure you want to wait for this book?') }}
+                    {{ __('Join the waitlist?') }}
                 </h2>
 
                 <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
@@ -100,7 +100,7 @@
                     </x-secondary-button>
 
                     <button type="submit" class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out border border-transparent rounded-md ms-3 bg-primary-600 hover:bg-primary-500 active:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800">
-                        {{ __('Queue Book') }}
+                        {{ __('Queue') }}
                     </button>
                 </div>
             </form>

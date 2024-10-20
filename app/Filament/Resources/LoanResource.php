@@ -24,12 +24,12 @@ class LoanResource extends Resource
 
     public static function getModelLabel(): string
     {
-        return 'History';
+        return __('History');
     }
 
     public static function getPluralLabel(): ?string
     {
-        return 'Histories';
+        return __('Histories');
     }
 
     public static function form(Form $form): Form
@@ -45,37 +45,37 @@ class LoanResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('copy.book.title')
-                    ->label('Book')
+                    ->translateLabel()
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('copy.call_number')
-                    ->label('Call Number')
+                    ->label(__('Call Number'))
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('user.name')
-                    ->label('User')
+                    ->translateLabel()
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('loaned_at')
-                    ->label('Loaned At'),
+                    ->translateLabel(),
                 TextColumn::make('returned_at')
-                    ->label('Returned At'),
+                    ->translateLabel(),
                 TextColumn::make('status')
-                    ->label('Status')
+                    ->translateLabel()
                     ->getStateUsing(function ($record) {
                         if ($record->loaned_at && !$record->returned_at) {
-                            return 'Loaned';
+                            return __('Loaned');
                         } elseif ($record->loaned_at && $record->returned_at) {
-                            return 'Returned';
+                            return __('Returned');
                         } else {
-                            return 'Queued';
+                            return __('Queued');
                         }
                     })
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {
-                        'Queued' => 'gray',
-                        'Loaned' => 'warning',
-                        'Returned' => 'success'
+                        __('Queued') => 'gray',
+                        __('Loaned') => 'warning',
+                        __('Returned') => 'success'
                     }),
             ])
             ->filters([

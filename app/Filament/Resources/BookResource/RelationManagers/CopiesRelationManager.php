@@ -14,11 +14,17 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CopiesRelationManager extends RelationManager
 {
     protected static string $relationship = 'copies';
+
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
+    {
+        return __('Copies');
+    }
 
     public function form(Form $form): Form
     {
@@ -27,9 +33,11 @@ class CopiesRelationManager extends RelationManager
                 Grid::make(1)
                     ->schema([
                         TextInput::make('call_number')
+                            ->label(__('Call Number'))
                             ->required()
                             ->maxLength(255),
                         FileUpload::make('file')
+                            ->translateLabel()
                             ->required(),
                     ])
             ]);
@@ -39,8 +47,10 @@ class CopiesRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                TextColumn::make('call_number'),
+                TextColumn::make('call_number')
+                    ->label(__('Call Number')),
                 IconColumn::make('is_borrowed')
+                    ->translateLabel()
                     ->boolean()
                     ->trueIcon('heroicon-o-check-circle')
                     ->falseIcon('heroicon-o-x-circle')

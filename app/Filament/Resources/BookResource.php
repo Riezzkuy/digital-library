@@ -28,6 +28,16 @@ class BookResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
 
+    public static function getModelLabel(): string
+    {
+        return __('Book');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Books');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -36,7 +46,7 @@ class BookResource extends Resource
                     ->schema([
                         TextInput::make('title')
                             ->lazy()
-                            ->label('Title')
+                            ->translateLabel()
                             ->required()
                             ->afterStateUpdated(function (string $operation, $state, Forms\Set $set) {
                                 if ($operation === 'edit') {
@@ -53,35 +63,39 @@ class BookResource extends Resource
                             ->required()
                             ->unique(ignoreRecord: true),
                         DatePicker::make('published_at')
+                            ->translateLabel()
                             ->native(false)
                             ->displayFormat('d/m/Y')
                             ->required(),
-                        Select::make('publisher_id')
-                            ->label('Publisher')
+                        Select::make('publisher')
+                            ->translateLabel()
                             ->relationship('publisher', 'name')
                             ->searchable()
                             ->required(),
                         Select::make('authors')
-                            ->label('Author')
+                            ->translateLabel()
                             ->multiple()
                             ->relationship('authors', 'name')
                             ->searchable()
                             ->required(),
                         Select::make('categories')
-                            ->label('Category')
+                            ->translateLabel()
                             ->multiple()
                             ->relationship(titleAttribute: 'name')
                             ->searchable()
                             ->required(),
                         TextInput::make('description')
+                            ->translateLabel()
                             ->required(),
                         TextInput::make('pages')
+                            ->translateLabel()
                             ->type('number')
                             ->required(),
                     ]),
                 Section::make('Meta')
                     ->schema([
                         FileUpload::make('cover')
+                            ->translateLabel()
                             ->image()
                             ->directory('books/covers')
                             ->required(),
@@ -94,29 +108,29 @@ class BookResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('title')
-                    ->label('Title')
+                    ->translateLabel()
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('published_at')
-                    ->label('Published At')
+                    ->translateLabel()
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('authors.name')
-                    ->label('Author')
+                    ->translateLabel()
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('categories.name')
-                    ->label('Categories')
+                    ->translateLabel()
                     ->badge(),
                 TextColumn::make('description')
-                    ->label('Description')
+                    ->translateLabel()
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('pages')
-                    ->label('Pages')
+                    ->translateLabel()
                     ->sortable(),
                 ImageColumn::make('cover')
-                    ->label('Cover'),
+                    ->translateLabel(),
             ])
             ->filters([
                 //

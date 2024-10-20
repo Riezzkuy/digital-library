@@ -22,13 +22,23 @@ class AuthorResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-user';
 
+    public static function getModelLabel(): string
+    {
+        return __('Author');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Authors');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 TextInput::make('name')
                     ->lazy()
-                    ->label('Name')
+                    ->translateLabel()
                     ->required()
                     ->afterStateUpdated(function (string $operation, $state, Forms\Set $set) {
                         if ($operation === 'edit') {
@@ -49,7 +59,7 @@ class AuthorResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->label('Name')
+                    ->translateLabel()
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('slug')

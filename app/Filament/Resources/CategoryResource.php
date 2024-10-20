@@ -22,13 +22,23 @@ class CategoryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
 
+    public static function getModelLabel(): string
+    {
+        return __(key: 'Category');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Categories');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 TextInput::make('name')
                     ->lazy()
-                    ->label('Name')
+                    ->translateLabel()
                     ->required()
                     ->afterStateUpdated(function (string $operation, $state, Forms\Set $set) {
                         if ($operation === 'edit') {
@@ -49,7 +59,7 @@ class CategoryResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->label('Name')
+                    ->translateLabel()
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('slug')

@@ -18,6 +18,8 @@ class BookList extends Component
 {
     use WithPagination;
 
+    public $perPage = 4;
+
     #[Url()]
     public $search = '';
 
@@ -30,11 +32,18 @@ class BookList extends Component
         $this->resetPage();
     }
 
+    #[On('showMore')]
+    public function loadMore()
+    {
+        $this->perPage += 4;
+        $this->resetPage();
+    }
+
     #[Computed()]
     public function books()
     {
         return Book::search($this->search)
-            ->paginate(4);
+            ->paginate($this->perPage);
     }
 
     public function getQueuedCountForBook($bookId)

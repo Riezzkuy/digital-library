@@ -19,21 +19,40 @@ class PublisherResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
+    public static function getModelLabel(): string
+    {
+        return __('Publisher');
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return __('Publishers');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->translateLabel()
                     ->required(),
-                Forms\Components\TextInput::make('address'),
-                Forms\Components\TextInput::make('city'),
-                Forms\Components\TextInput::make('state'),
-                Forms\Components\TextInput::make('country'),
+                Forms\Components\TextInput::make('address')
+                    ->translateLabel(),
+                Forms\Components\TextInput::make('city')
+                    ->translateLabel(),
+                Forms\Components\TextInput::make('state')
+                    ->translateLabel(),
+                Forms\Components\TextInput::make('country')
+                    ->translateLabel(),
                 Forms\Components\TextInput::make('phone')
-                    ->tel(),
+                    ->tel()
+                    ->translateLabel(),
                 Forms\Components\TextInput::make('email')
-                    ->email(),
-                Forms\Components\TextInput::make('website'),
+                    ->email()
+                    ->translateLabel(),
+                Forms\Components\TextInput::make('website')
+                    ->url()
+                    ->translateLabel(),
             ]);
     }
 
@@ -42,26 +61,36 @@ class PublisherResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->translateLabel()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('address')
+                    ->translateLabel()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('city')
+                    ->translateLabel()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('state')
+                    ->translateLabel()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('country')
+                    ->translateLabel()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('phone')
+                    ->translateLabel()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
+                    ->translateLabel()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('website')
+                    ->translateLabel()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->translateLabel()
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->translateLabel()
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
