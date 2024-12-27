@@ -67,7 +67,7 @@ class BookResource extends Resource
                             ->native(false)
                             ->displayFormat('d/m/Y')
                             ->required(),
-                        Select::make('publisher')
+                        Select::make('publisher_id')
                             ->translateLabel()
                             ->relationship('publisher', 'name')
                             ->searchable()
