@@ -60,7 +60,6 @@ class BookResource extends Resource
                             ->unique(ignoreRecord: true)
                             ->readOnly(),
                         TextInput::make('isbn')
-                            ->required()
                             ->unique(ignoreRecord: true),
                         DatePicker::make('published_at')
                             ->translateLabel()
