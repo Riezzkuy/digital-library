@@ -60,14 +60,13 @@ class BookResource extends Resource
                             ->unique(ignoreRecord: true)
                             ->readOnly(),
                         TextInput::make('isbn')
-                            ->required()
                             ->unique(ignoreRecord: true),
                         DatePicker::make('published_at')
                             ->translateLabel()
                             ->native(false)
                             ->displayFormat('d/m/Y')
                             ->required(),
-                        Select::make('publisher')
+                        Select::make('publisher_id')
                             ->translateLabel()
                             ->relationship('publisher', 'name')
                             ->searchable()

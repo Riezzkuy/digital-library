@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->foreignIdFor(Publisher::class);
             $table->string('title');
             $table->string('slug')->unique();
-            $table->string('isbn')->unique();
+            $table->string('isbn')->nullable();
             $table->date('published_at');
             $table->string('cover');
             $table->string('description');
