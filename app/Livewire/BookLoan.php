@@ -65,7 +65,7 @@ class BookLoan extends Component
 
         $this->copy->update(['is_borrowed' => true]);
 
-        ReturnBookJob::dispatch($loan)->delay(now()->addMinutes(1));
+        ReturnBookJob::dispatch($loan)->delay(now()->addMinutes(5));
 
         $this->stock = false;
         $this->isLoaned = true;

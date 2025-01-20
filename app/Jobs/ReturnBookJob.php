@@ -46,7 +46,8 @@ class ReturnBookJob implements ShouldQueue
             $nextLoan->update(['loaned_at' => now()]);
             $copy->update(['is_borrowed' => true]);
 
-            ReturnBookJob::dispatch($nextLoan)->delay(now()->addMinutes(1));
+            ReturnBookJob::dispatch($nextLoan)->delay(now()->addMinutes(5));
+
         }
     }
 }
