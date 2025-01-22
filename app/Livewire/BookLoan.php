@@ -23,6 +23,8 @@ class BookLoan extends Component
 
     public $isQueued;
 
+    public $notification;
+
     public function mount($bookId)
     {
         $this->bookId = $bookId;
@@ -54,6 +56,13 @@ class BookLoan extends Component
             redirect()->route('login');
         }
 
+        $loanCount = Loan::where('user_id', auth()->id())->thisWeek()->count();
+
+        if ($loanCount >= 2) {
+            $this->notification = __('You have reached the maximum loan limit for this week.');
+            return;
+        }
+
         $this->copy = Copy::where('book_id', $bookId)
             ->where('is_borrowed', false)
             ->firstOrFail();
@@ -78,6 +87,13 @@ class BookLoan extends Component
     {
         if (!auth()->check()) {
             redirect()->route('login');
+        }
+
+        $loanCount = Loan::where('user_id', auth()->id())->thisWeek()->count();
+
+        if ($loanCount >= 2) {
+            $this->addError('stock', 'You have reached the maximum loan limit for this week.');
+            return;
         }
 
         $this->copy = Copy::where('book_id', $bookId)
@@ -113,6 +129,41 @@ class BookLoan extends Component
         $this->isQueued = false;
 
         $this->redirect('/queued', navigate: true);
+    }
+
+    public function returnBook($loanId)
+    {
+        if (!auth()->check()) {
+            redirect()->route('login');
+        }
+
+        $loan = Loan::findOrFail($loanId);
+
+        $loan->update([
+            'returned_at' => now(),
+        ]);
+
+        $loan->copy->update([
+            'is_borrowed' => false,
+        ]);
+
+        // if there is a queued loan, loan it
+        $queuedLoan = Loan::where('copy_id', $loan->copy_id)
+            ->whereNull('loaned_at')
+            ->whereNull('returned_at')
+            ->first();
+
+        if ($queuedLoan) {
+            $queuedLoan->update([
+                'loaned_at' => now(),
+            ]);
+
+            $queuedLoan->copy->update([
+                'is_borrowed' => true,
+            ]);
+        }
+
+        $this->redirect('/', navigate: true);
     }
 
     public function render()

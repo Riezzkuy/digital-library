@@ -18,4 +18,9 @@ class Loan extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function scopeThisWeek($query)
+    {
+        return $query->where('loaned_at', '>=', now()->startOfWeek());
+    }
 }
