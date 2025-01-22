@@ -81,7 +81,7 @@ new class extends Component {
                             </x-dropdown-link>
 
                             <x-dropdown-link :href="route('queued')" wire:navigate>
-                                {{ __('Queued') }}
+                                {{ __('Queue') }}
                             </x-dropdown-link>
 
                             <!-- Authentication -->
