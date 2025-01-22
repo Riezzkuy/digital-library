@@ -2,6 +2,9 @@
     <div class="items-end justify-between mb-4 space-y-4 sm:flex sm:space-y-0 md:mb-8">
       <div>
         <h2 class="mt-3 text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">{{ __('Loaned') }}</h2>
+        <span class="text-sm text-gray-600 dark:text-gray-400">
+            {{ __('Total loaned books this week') }} : {{ $loanedBooksCount }} / 2
+        </span>
       </div>
     </div>
     <div class="grid gap-4 mb-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-3 xl:grid-cols-4">

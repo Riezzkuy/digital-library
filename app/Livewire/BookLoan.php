@@ -23,6 +23,8 @@ class BookLoan extends Component
 
     public $isQueued;
 
+    public $notification;
+
     public function mount($bookId)
     {
         $this->bookId = $bookId;
@@ -54,6 +56,13 @@ class BookLoan extends Component
             redirect()->route('login');
         }
 
+        $loanCount = Loan::where('user_id', auth()->id())->thisWeek()->count();
+
+        if ($loanCount >= 2) {
+            $this->notification = __('You have reached the maximum loan limit for this week.');
+            return;
+        }
+
         $this->copy = Copy::where('book_id', $bookId)
             ->where('is_borrowed', false)
             ->firstOrFail();
@@ -78,6 +87,13 @@ class BookLoan extends Component
     {
         if (!auth()->check()) {
             redirect()->route('login');
+        }
+
+        $loanCount = Loan::where('user_id', auth()->id())->thisWeek()->count();
+
+        if ($loanCount >= 2) {
+            $this->addError('stock', 'You have reached the maximum loan limit for this week.');
+            return;
         }
 
         $this->copy = Copy::where('book_id', $bookId)

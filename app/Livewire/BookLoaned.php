@@ -9,6 +9,16 @@ use Livewire\Component;
 
 class BookLoaned extends Component
 {
+    public $loanedBooksCount;
+
+    public function mount()
+    {
+        $this->loanedBooksCount = Loan::where('user_id', auth()->id())
+        ->whereNotNull('loaned_at')
+        ->whereNull('returned_at')
+        ->thisWeek()->count();
+    }
+
     #[Computed()]
     public function loans()
     {

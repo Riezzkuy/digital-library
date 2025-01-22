@@ -51,6 +51,9 @@
 
         <x-modal name="confirm-loan-book" :show="$errors->isNotEmpty()" focusable>
             <form wire:submit.prevent="loanBook({{ $bookId }})" class="p-6">
+                @if ($notification)
+                    <x-alert type="danger" :message="$notification" />
+                @endif
                 <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
                     {{ __('Loan this book?') }}
                 </h2>
@@ -111,7 +114,7 @@
             </button>
         @else
             <a href="{{ route('login') }}" class="flex justify-center items-center px-5 py-2.5 mt-4 text-sm font-medium text-white rounded-lg sm:mt-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
-                {{__('Login')}}
+                {{__('Login to Loan')}}
             </a>
         @endauth
         <x-modal name="confirm-queue-book" :show="$errors->isNotEmpty()" focusable>

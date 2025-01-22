@@ -28,7 +28,9 @@
     "Loaned": "Dipinjam",
     "Loaned at": "Pinjam pada",
     "Loan this book?": "Pinjam buku ini?",
+    "Login to Loan": "Masuk untuk meminjam buku",
     "Log in": "Masuk",
+    "Log Out": "Keluar",
     "Register": "Daftar",
     "Returned at": "Kembali pada",
     "Name": "Nama",
@@ -46,6 +48,7 @@
     "Publisher": "Penerbit",
     "Publishers": "Penerbit",
     "Queue": "Antri",
+    "Queued": "Antri",
     "Read": "Baca",
     "Readers": "Pembaca",
     "Return": "Kembalikan",
@@ -56,9 +59,13 @@
     "Stock": "Stok",
     "Show more": "Tampilkan Lebih Banyak",
     "Title": "Judul",
+    "The email must be a valid @wicida.ac.id email address.": "Email harus berupa alamat email @wicida.ac.id yang valid.",
+    "The password confirmation does not match.": "Konfirmasi kata sandi tidak cocok.",
+    "Total loaned books this week": "Total buku yang dipinjam minggu ini",
     "Updated at": "Diperbarui Pada",
     "User": "Pengguna",
     "Website": "Situs Web",
     "Welcome to Digital Library": "Selamat Datang di Perpustakaan Digital",
-    "Where knowledge meets convenience.": "Tempat di mana pengetahuan bertemu dengan kenyamanan."
+    "Where knowledge meets convenience.": "Tempat di mana pengetahuan bertemu dengan kenyamanan.",
+    "You have reached the maximum loan limit for this week.": "Anda telah mencapai batas pinjaman maksimum untuk minggu ini."
 }
