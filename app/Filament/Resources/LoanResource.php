@@ -52,7 +52,7 @@ class LoanResource extends Resource
                     ->label(__('Call Number'))
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('user.name')
+                TextColumn::make('user.email')
                     ->translateLabel()
                     ->sortable()
                     ->searchable(),
